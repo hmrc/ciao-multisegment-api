@@ -1,0 +1,5 @@
+# API 2.0 routes
+
+GET        /                   @uk.gov.hmrc.ciaomultisegmentapi.controllers.WelcomeController.welcome()
+GET        /:friend            @uk.gov.hmrc.ciaomultisegmentapi.controllers.WelcomeController.welcomeFriend(friend: String)
+GET        /:friend/:city      @uk.gov.hmrc.ciaomultisegmentapi.controllers.WelcomeController.welcomeFriendCity(friend: String, city: String)

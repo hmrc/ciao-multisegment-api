@@ -1,5 +1,8 @@
 # Add all the application routes to the app.routes file
-->         /ciao-multisegment-api              app.Routes
+
 ->         /                          health.Routes
+->         /                          definition.Routes
+
+->         /                          live_20.Routes
 
 GET        /admin/metrics             com.kenshoo.play.metrics.MetricsController.metrics
