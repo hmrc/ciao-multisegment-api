@@ -46,10 +46,6 @@ lazy val appDependencies: Seq[ModuleID] = compile ++ test
 
 lazy val microservice = Project(appName, file("."))
   .enablePlugins(_root_.play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
-  .settings(
-    libraryDependencies ++= appDependencies,
-    evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false)
-  )
   .settings(scalaSettings: _*)
   .settings(publishingSettings: _*)
   .settings(defaultSettings(): _*)
@@ -59,9 +55,11 @@ lazy val microservice = Project(appName, file("."))
     targetJvm := "jvm-1.8",
     scalaVersion := "2.11.11",
     libraryDependencies ++= appDependencies,
-    evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false)
+    evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(warnScalaVersionEviction = false)
   )
   .settings(
+    testOptions in Test := Seq(Tests.Filter(_ => true)), // this removes duplicated lines in the HTML test reports
+    unmanagedSourceDirectories in Test := Seq((baseDirectory in Test).value / "test"),
     addTestReportOption(Test, "test-reports")
   )
   .settings(resolvers ++= Seq(
@@ -70,6 +68,6 @@ lazy val microservice = Project(appName, file("."))
   ))
 
 // Coverage configuration
-coverageMinimum := 0
+coverageMinimum := 22
 coverageFailOnMinimum := true
 coverageExcludedPackages := "<empty>;com.kenshoo.play.metrics.*;.*definition.*;prod.*;testOnlyDoNotUseInAppConf.*;app.*;uk.gov.hmrc.BuildInfo;views.*;uk.gov.hmrc.ciaomultisegmentapi.config.*"
