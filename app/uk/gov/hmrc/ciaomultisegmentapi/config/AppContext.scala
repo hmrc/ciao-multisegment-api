@@ -23,7 +23,11 @@ import play.api.Configuration
 class AppContext @Inject()(configuration: Configuration) {
 
   private val apiContextConfigKey = "api.context"
-  private def apiConfigException(apiConfigKey: String) = new IllegalStateException(s"$apiConfigKey is not configured")
+
+  private def apiConfigException(apiConfigKey: String): IllegalStateException = {
+    new IllegalStateException(s"$apiConfigKey is not configured")
+  }
+
   lazy val apiContext: String = configuration.getString(apiContextConfigKey).getOrElse(throw apiConfigException(apiContextConfigKey))
 
 }
