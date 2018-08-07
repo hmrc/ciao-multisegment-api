@@ -37,9 +37,9 @@ lazy val compile = Seq(
 lazy val testScope = "test"
 
 lazy val test = Seq(
-  "uk.gov.hmrc"       %% "hmrctest"  % "3.0.0"             % testScope,
-  "org.scalatest"     %% "scalatest" % "3.0.4"             % testScope,
-  "org.pegdown"        % "pegdown"   % "1.6.0"             % testScope,
+  "uk.gov.hmrc" %% "hmrctest" % "3.0.0" % testScope,
+  "org.scalatest" %% "scalatest" % "3.0.4" % testScope,
+  "org.pegdown" % "pegdown" % "1.6.0" % testScope,
   "com.typesafe.play" %% "play-test" % PlayVersion.current % testScope
 )
 

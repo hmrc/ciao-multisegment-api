@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
+import akka.stream.Materializer
 import play.api.http.Status
 import play.api.libs.json.Json
 import play.api.test.FakeRequest
@@ -26,7 +27,7 @@ import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
 
 class CountryControllerSpec extends UnitSpec with WithFakeApplication {
 
-  private implicit val materializer = fakeApplication.materializer
+  private implicit val materializer: Materializer = fakeApplication.materializer
 
   private val controller = new CountryController
 
