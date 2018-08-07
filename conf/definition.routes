@@ -1,4 +1,4 @@
 # routes for API documentation
 
 GET        /api/definition               @uk.gov.hmrc.ciaomultisegmentapi.controllers.DefinitionController.get
-GET        /api/conf/:version/*file      @uk.gov.hmrc.ciaomultisegmentapi.controllers.DocumentationController.raml(version, file)
+GET        /api/conf/:version/*file      @uk.gov.hmrc.api.controllers.DocumentationController.conf(version, file)
