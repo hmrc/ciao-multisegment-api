@@ -4,5 +4,6 @@
 ->         /                          definition.Routes
 
 ->         /                          live_20.Routes
+->         /                          live_30.Routes
 
 GET        /admin/metrics             com.kenshoo.play.metrics.MetricsController.metrics

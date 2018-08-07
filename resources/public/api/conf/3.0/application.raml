@@ -1,0 +1,50 @@
+#%RAML 1.0
+---
+title: Ciao multi-segment context dummy API
+version: 3.0
+
+protocols: [ HTTPS ]
+baseUri: https://api.service.hmrc.gov.uk/
+
+documentation:
+ - title: Overview
+   content: !include docs/overview.md
+
+mediaType: application/json
+
+uses:
+  sec: https://developer.service.hmrc.gov.uk/api-documentation/assets/common/modules/securitySchemes.raml
+  headers: https://developer.service.hmrc.gov.uk/api-documentation/assets/common/modules/headers.raml
+  annotations: https://developer.service.hmrc.gov.uk/api-documentation/assets/common/modules/annotations.raml
+  types: https://developer.service.hmrc.gov.uk/api-documentation/assets/common/modules/types.raml
+
+/api-platform-test/ciao:
+  /country-details:
+    /{country}:
+      uriParameters:
+        country:
+          type: string
+      /display:
+        get:
+          displayName: Show Country - Get Version
+          is: [headers.acceptHeader]
+        put:
+          displayName: Show Country - Put Version
+          is: [headers.acceptHeader]
+        options:
+          displayName: Show Country - Options Version
+          is: [headers.acceptHeader]
+
+      /{city}:
+        uriParameters:
+          city:
+            type: string
+        get:
+          displayName: Show Country & City - Get Version
+          is: [headers.acceptHeader]
+        post:
+          displayName: Show Country & City - Post Version
+          is: [headers.acceptHeader]
+        delete:
+          displayName: Show Country & City - Delete Version
+          is: [headers.acceptHeader]

@@ -1,0 +1,9 @@
+# API 3.0 routes
+
+GET       /country-details/:country/display         @uk.gov.hmrc.ciaomultisegmentapi.controllers.CountryController.showCountry(country: String)
+PUT       /country-details/:country/display         @uk.gov.hmrc.ciaomultisegmentapi.controllers.CountryController.showCountry(country: String)
+OPTIONS   /country-details/:country/display         @uk.gov.hmrc.ciaomultisegmentapi.controllers.CountryController.showCountry(country: String)
+
+GET       /country-details/:country/:city           @uk.gov.hmrc.ciaomultisegmentapi.controllers.CountryController.showCountryAndCity(country: String, city: String)
+POST      /country-details/:country/:city           @uk.gov.hmrc.ciaomultisegmentapi.controllers.CountryController.showCountryAndCity(country: String, city: String)
+DELETE    /country-details/:country/:city           @uk.gov.hmrc.ciaomultisegmentapi.controllers.CountryController.showCountryAndCity(country: String, city: String)
