@@ -21,9 +21,9 @@ import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 import uk.gov.hmrc.versioning.SbtGitVersioning
 import uk.gov.hmrc.DefaultBuildSettings.addTestReportOption
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
-
 import uk.gov.hmrc._
 import DefaultBuildSettings._
+import sbt.Tests.{Group, SubProcess}
 
 
 val appName = "ciao-multisegment-api"
@@ -34,13 +34,14 @@ lazy val compile = Seq(
   "uk.gov.hmrc" %% "play-hmrc-api" % "3.0.0"
 )
 
-lazy val testScope = "test"
+lazy val testScope = "test, it"
 
 lazy val test = Seq(
   "uk.gov.hmrc" %% "hmrctest" % "3.0.0" % testScope,
   "org.scalatest" %% "scalatest" % "3.0.4" % testScope,
   "org.pegdown" % "pegdown" % "1.6.0" % testScope,
-  "com.typesafe.play" %% "play-test" % PlayVersion.current % testScope
+  "com.typesafe.play" %% "play-test" % PlayVersion.current % testScope,
+  "com.github.tomakehurst" % "wiremock" % "2.11.0" % testScope
 )
 
 lazy val appDependencies: Seq[ModuleID] = compile ++ test
@@ -60,13 +61,26 @@ lazy val microservice = Project(appName, file("."))
   )
   .settings(
     testOptions in Test := Seq(Tests.Filter(_ => true)), // this removes duplicated lines in the HTML test reports
-    unmanagedSourceDirectories in Test := Seq((baseDirectory in Test).value / "test"),
+    unmanagedSourceDirectories in Test := Seq((baseDirectory in Test).value / "test" / "unit"),
     addTestReportOption(Test, "test-reports")
   )
+  .configs(IntegrationTest)
+  .settings(Defaults.itSettings)
+  .settings(
+    Keys.fork in IntegrationTest := false,
+    unmanagedSourceDirectories in IntegrationTest := Seq((baseDirectory in IntegrationTest).value / "test" / "it"),
+    addTestReportOption(IntegrationTest, "int-test-reports"),
+    testGrouping in IntegrationTest := oneForkedJvmPerTest((definedTests in IntegrationTest).value),
+    parallelExecution in IntegrationTest := false)
   .settings(resolvers ++= Seq(
     Resolver.bintrayRepo("hmrc", "releases"),
     Resolver.jcenterRepo
   ))
+
+def oneForkedJvmPerTest(tests: Seq[TestDefinition]): Seq[Group] =
+  tests map {
+    test => Group(test.name, Seq(test), SubProcess(ForkOptions(runJVMOptions = Seq("-Dtest.name=" + test.name))))
+  }
 
 // Coverage configuration
 coverageMinimum := 22
