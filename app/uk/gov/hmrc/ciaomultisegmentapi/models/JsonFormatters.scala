@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.ciaomultisegmentapi.models
 
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, OFormat}
 
 object JsonFormatters {
 
-  implicit val formatWelcomeMessage = Json.format[WelcomeMessage]
+  implicit val formatWelcomeMessage: OFormat[WelcomeMessage] = Json.format[WelcomeMessage]
 }
