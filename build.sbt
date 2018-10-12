@@ -30,8 +30,8 @@ val appName = "ciao-multisegment-api"
 
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-play-25" % "1.7.0",
-  "uk.gov.hmrc" %% "play-hmrc-api" % "3.0.0"
+  "uk.gov.hmrc" %% "bootstrap-play-25" % "3.10.0",
+  "uk.gov.hmrc" %% "play-hmrc-api" % "3.2.0"
 )
 
 lazy val testScope = "test, it"
@@ -47,7 +47,7 @@ lazy val test = Seq(
 lazy val appDependencies: Seq[ModuleID] = compile ++ test
 
 lazy val microservice = Project(appName, file("."))
-  .enablePlugins(_root_.play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
+  .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory)
   .settings(scalaSettings: _*)
   .settings(publishingSettings: _*)
   .settings(defaultSettings(): _*)
@@ -55,6 +55,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(
     name := appName,
     targetJvm := "jvm-1.8",
+    majorVersion := 0,
     scalaVersion := "2.11.11",
     libraryDependencies ++= appDependencies,
     evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(warnScalaVersionEviction = false)
