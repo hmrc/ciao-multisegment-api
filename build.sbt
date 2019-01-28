@@ -30,14 +30,14 @@ val appName = "ciao-multisegment-api"
 
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-play-25" % "3.10.0",
+  "uk.gov.hmrc" %% "bootstrap-play-25" % "4.3.0",
   "uk.gov.hmrc" %% "play-hmrc-api" % "3.2.0"
 )
 
 lazy val testScope = "test, it"
 
 lazy val test = Seq(
-  "uk.gov.hmrc" %% "hmrctest" % "3.0.0" % testScope,
+  "uk.gov.hmrc" %% "hmrctest" % "3.3.0" % testScope,
   "org.scalatest" %% "scalatest" % "3.0.4" % testScope,
   "org.pegdown" % "pegdown" % "1.6.0" % testScope,
   "com.typesafe.play" %% "play-test" % PlayVersion.current % testScope,
