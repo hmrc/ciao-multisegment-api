@@ -30,7 +30,7 @@ val appName = "ciao-multisegment-api"
 
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-play-25" % "4.3.0",
+  "uk.gov.hmrc" %% "bootstrap-play-25" % "4.11.0",
   "uk.gov.hmrc" %% "play-hmrc-api" % "3.2.0"
 )
 
