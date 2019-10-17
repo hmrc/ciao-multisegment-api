@@ -34,7 +34,7 @@ lazy val compile = Seq(
   "uk.gov.hmrc" %% "play-hmrc-api" % "3.2.0"
 )
 
-lazy val testScope = "test, it"
+lazy val testScope = "test"
 
 lazy val test = Seq(
   "uk.gov.hmrc" %% "hmrctest" % "3.9.0-play-25" % testScope,
@@ -65,14 +65,6 @@ lazy val microservice = Project(appName, file("."))
     unmanagedSourceDirectories in Test := Seq((baseDirectory in Test).value / "test" / "unit"),
     addTestReportOption(Test, "test-reports")
   )
-  .configs(IntegrationTest)
-  .settings(Defaults.itSettings)
-  .settings(
-    Keys.fork in IntegrationTest := false,
-    unmanagedSourceDirectories in IntegrationTest := Seq((baseDirectory in IntegrationTest).value / "test" / "it"),
-    addTestReportOption(IntegrationTest, "int-test-reports"),
-    testGrouping in IntegrationTest := oneForkedJvmPerTest((definedTests in IntegrationTest).value),
-    parallelExecution in IntegrationTest := false)
   .settings(resolvers ++= Seq(
     Resolver.bintrayRepo("hmrc", "releases"),
     Resolver.jcenterRepo
@@ -84,6 +76,6 @@ def oneForkedJvmPerTest(tests: Seq[TestDefinition]): Seq[Group] =
   }
 
 // Coverage configuration
-coverageMinimum := 22
+coverageMinimum := 20
 coverageFailOnMinimum := true
 coverageExcludedPackages := "<empty>;com.kenshoo.play.metrics.*;.*definition.*;prod.*;testOnlyDoNotUseInAppConf.*;app.*;uk.gov.hmrc.BuildInfo;views.*;uk.gov.hmrc.ciaomultisegmentapi.config.*"
