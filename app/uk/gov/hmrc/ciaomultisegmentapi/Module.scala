@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package uk.gov.hmrc.ciaomultisegmentapi
 
 import com.google.inject.AbstractModule
 import uk.gov.hmrc.api.controllers.DocumentationController
+import uk.gov.hmrc.ciaomultisegmentapi.controllers.InjectableDocumentController
 import uk.gov.hmrc.http.CorePost
 import uk.gov.hmrc.play.bootstrap.http.DefaultHttpClient
 
@@ -25,7 +26,7 @@ class Module extends AbstractModule {
 
   override def configure(): Unit = {
     bind(classOf[CorePost]).to(classOf[DefaultHttpClient])
-    bind(classOf[DocumentationController]).toInstance(DocumentationController)
+    bind(classOf[DocumentationController]).to(classOf[InjectableDocumentController])
   }
 
 }

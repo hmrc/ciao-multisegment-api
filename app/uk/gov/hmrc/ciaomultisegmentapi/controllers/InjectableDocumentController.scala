@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ciaomultisegmentapi.models
+package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
-case class WelcomeMessage(message: String)
+import controllers.Assets
+import javax.inject.Inject
+import play.api.http.HttpErrorHandler
+import play.api.mvc.ControllerComponents
+import uk.gov.hmrc.api.controllers.DocumentationController
+
+class InjectableDocumentController @Inject()( cc:           ControllerComponents,
+                                               assets:       Assets,
+                                               errorHandler: HttpErrorHandler)extends DocumentationController(cc, assets, errorHandler)

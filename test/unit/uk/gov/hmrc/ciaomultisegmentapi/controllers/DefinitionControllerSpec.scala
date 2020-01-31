@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,24 @@
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
 import akka.stream.Materializer
+import org.scalatest.mockito.MockitoSugar
+import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+import play.api.Configuration
 import play.api.http.Status
 import play.api.libs.json.JsValue
 import play.api.mvc.Result
-import play.api.test.FakeRequest
-import uk.gov.hmrc.ciaomultisegmentapi.config.AppContext
-import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
+import play.api.test.{FakeRequest, StubControllerComponentsFactory}
 
-class DefinitionControllerSpec extends UnitSpec with WithFakeApplication {
+import uk.gov.hmrc.ciaomultisegmentapi.config.AppContext
+import uk.gov.hmrc.play.test.UnitSpec
+
+class DefinitionControllerSpec extends UnitSpec with MockitoSugar with GuiceOneAppPerSuite with StubControllerComponentsFactory {
+  implicit val materializer: Materializer = app.materializer
 
   trait Setup {
-    implicit val materializer: Materializer = fakeApplication.materializer
     val request = FakeRequest()
-    val controller = new DefinitionController(fakeApplication.injector.instanceOf[AppContext])
+    val appContext = new AppContext(app.configuration)
+    val controller = new DefinitionController(appContext, stubControllerComponents())
   }
 
   "get" should {

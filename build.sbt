@@ -28,18 +28,23 @@ import sbt.Tests.{Group, SubProcess}
 
 val appName = "ciao-multisegment-api"
 
+lazy val scalatestPlusPlayVersion = "3.1.2"
+lazy val mockitoVersion = "1.10.19"
+
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-play-25" % "5.1.0",
-  "uk.gov.hmrc" %% "play-hmrc-api" % "3.2.0"
+  "uk.gov.hmrc" %% "bootstrap-play-26" % "1.3.0",
+  "uk.gov.hmrc" %% "play-hmrc-api" % "4.1.0-play-26"
 )
 
 lazy val testScope = "test"
 
 lazy val test = Seq(
-  "uk.gov.hmrc" %% "hmrctest" % "3.9.0-play-25" % testScope,
+  "uk.gov.hmrc" %% "hmrctest" % "3.9.0-play-26" % testScope,
   "org.scalatest" %% "scalatest" % "3.0.4" % testScope,
   "org.pegdown" % "pegdown" % "1.6.0" % testScope,
+  "org.mockito" % "mockito-core" % mockitoVersion % testScope,
+  "org.scalatestplus.play" %% "scalatestplus-play" % scalatestPlusPlayVersion % testScope,
   "com.typesafe.play" %% "play-test" % PlayVersion.current % testScope,
   "com.github.tomakehurst" % "wiremock" % "2.11.0" % testScope
 )
@@ -56,7 +61,7 @@ lazy val microservice = Project(appName, file("."))
     name := appName,
     targetJvm := "jvm-1.8",
     majorVersion := 0,
-    scalaVersion := "2.11.11",
+    scalaVersion := "2.12.10",
     libraryDependencies ++= appDependencies,
     evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(warnScalaVersionEviction = false)
   )
@@ -70,10 +75,6 @@ lazy val microservice = Project(appName, file("."))
     Resolver.jcenterRepo
   ))
 
-def oneForkedJvmPerTest(tests: Seq[TestDefinition]): Seq[Group] =
-  tests map {
-    test => Group(test.name, Seq(test), SubProcess(ForkOptions(runJVMOptions = Seq("-Dtest.name=" + test.name))))
-  }
 
 // Coverage configuration
 coverageMinimum := 20
