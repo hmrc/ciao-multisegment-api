@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,6 @@ class AppContext @Inject()(configuration: Configuration) {
     new IllegalStateException(s"$apiConfigKey is not configured")
   }
 
-  lazy val apiContext: String = configuration.getString(apiContextConfigKey).getOrElse(throw apiConfigException(apiContextConfigKey))
+  lazy val apiContext: String = configuration.getOptional[String](apiContextConfigKey).getOrElse(throw apiConfigException(apiContextConfigKey))
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,17 +19,17 @@ package uk.gov.hmrc.ciaomultisegmentapi.controllers
 import akka.stream.Materializer
 import play.api.http.Status
 import play.api.libs.json.Json
-import play.api.test.FakeRequest
+import play.api.test.{FakeRequest, StubControllerComponentsFactory}
 import play.api.http.HttpVerbs._
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
 import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
 
-class CountryControllerSpec extends UnitSpec with WithFakeApplication {
+class CountryControllerSpec extends UnitSpec with WithFakeApplication with StubControllerComponentsFactory{
 
   private implicit val materializer: Materializer = fakeApplication.materializer
 
-  private val controller = new CountryController
+  private val controller = new CountryController(stubControllerComponents())
 
   private val country = "Chile"
   private val city = "Santiago"
