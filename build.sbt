@@ -33,7 +33,7 @@ lazy val mockitoVersion = "1.10.19"
 
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-play-26" % "1.3.0",
+  "uk.gov.hmrc" %% "bootstrap-play-26" % "1.4.0",
   "uk.gov.hmrc" %% "play-hmrc-api" % "4.1.0-play-26"
 )
 
@@ -61,7 +61,7 @@ lazy val microservice = Project(appName, file("."))
     name := appName,
     targetJvm := "jvm-1.8",
     majorVersion := 0,
-    scalaVersion := "2.12.10",
+    scalaVersion := "2.12.12",
     libraryDependencies ++= appDependencies,
     evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(warnScalaVersionEviction = false)
   )
