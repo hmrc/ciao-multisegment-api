@@ -70,13 +70,9 @@ lazy val microservice = Project(appName, file("."))
     unmanagedSourceDirectories in Test := Seq((baseDirectory in Test).value / "test" / "unit"),
     addTestReportOption(Test, "test-reports")
   )
-  .settings(resolvers ++= Seq(
-    Resolver.bintrayRepo("hmrc", "releases"),
-    Resolver.jcenterRepo
-  ))
 
 
 // Coverage configuration
-coverageMinimum := 20
+coverageMinimum := 35
 coverageFailOnMinimum := true
 coverageExcludedPackages := "<empty>;com.kenshoo.play.metrics.*;.*definition.*;prod.*;testOnlyDoNotUseInAppConf.*;app.*;uk.gov.hmrc.BuildInfo;views.*;uk.gov.hmrc.ciaomultisegmentapi.config.*"
