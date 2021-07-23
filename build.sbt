@@ -18,7 +18,6 @@ import play.sbt.PlayImport._
 import play.core.PlayVersion
 import uk.gov.hmrc.SbtAutoBuildPlugin
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
-import uk.gov.hmrc.versioning.SbtGitVersioning
 import uk.gov.hmrc.DefaultBuildSettings.addTestReportOption
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 import uk.gov.hmrc._
@@ -33,8 +32,8 @@ lazy val mockitoVersion = "1.10.19"
 
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-play-26" % "1.4.0",
-  "uk.gov.hmrc" %% "play-hmrc-api" % "4.1.0-play-26"
+  "uk.gov.hmrc" %% "bootstrap-backend-play-26" % "5.7.0",
+  "uk.gov.hmrc" %% "play-hmrc-api" % "6.4.0-play-26"
 )
 
 lazy val testScope = "test"
@@ -46,13 +45,13 @@ lazy val test = Seq(
   "org.mockito" % "mockito-core" % mockitoVersion % testScope,
   "org.scalatestplus.play" %% "scalatestplus-play" % scalatestPlusPlayVersion % testScope,
   "com.typesafe.play" %% "play-test" % PlayVersion.current % testScope,
-  "com.github.tomakehurst" % "wiremock" % "2.11.0" % testScope
+  "com.github.tomakehurst" % "wiremock-jre8-standalone" % "2.27.2" % testScope
 )
 
 lazy val appDependencies: Seq[ModuleID] = compile ++ test
 
 lazy val microservice = Project(appName, file("."))
-  .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory)
+  .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtDistributablesPlugin)
   .settings(scalaSettings: _*)
   .settings(publishingSettings: _*)
   .settings(defaultSettings(): _*)
