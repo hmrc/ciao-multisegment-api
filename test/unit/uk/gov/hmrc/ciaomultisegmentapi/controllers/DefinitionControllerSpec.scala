@@ -19,7 +19,6 @@ package uk.gov.hmrc.ciaomultisegmentapi.controllers
 import akka.stream.Materializer
 import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.Configuration
 import play.api.http.Status
 import play.api.libs.json.JsValue
 import play.api.mvc.Result

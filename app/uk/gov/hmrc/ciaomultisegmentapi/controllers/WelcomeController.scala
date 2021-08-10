@@ -21,26 +21,26 @@ import play.api.libs.json.Json.toJson
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
 import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
-import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
 import scala.concurrent.Future.successful
+import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
 @Singleton()
 class WelcomeController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
-	def welcome(): Action[AnyContent] = Action.async { implicit request =>
+	def welcome(): Action[AnyContent] = Action.async { _ =>
     successful(
       Ok(toJson(WelcomeMessage("Ciao!")))
     )
   }
 
-  def welcomeFriend(friend: String): Action[AnyContent] = Action.async { implicit request =>
+  def welcomeFriend(friend: String): Action[AnyContent] = Action.async { _ =>
     successful(
       Ok(toJson(WelcomeMessage(s"Ciao $friend!")))
     )
   }
 
-  def welcomeFriendCity(friend: String, city: String): Action[AnyContent] = Action.async { implicit request =>
+  def welcomeFriendCity(friend: String, city: String): Action[AnyContent] = Action.async { _ =>
     successful(
       Ok(toJson(WelcomeMessage(s"Ciao $friend! Welcome to $city!")))
     )
