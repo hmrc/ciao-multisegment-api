@@ -17,33 +17,34 @@
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
 import akka.stream.Materializer
-import org.scalatest.mockito.MockitoSugar
-import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.http.Status
 import play.api.libs.json.JsValue
-import play.api.mvc.Result
 import play.api.test.{FakeRequest, StubControllerComponentsFactory}
-
+import play.api.test.Helpers._
 import uk.gov.hmrc.ciaomultisegmentapi.config.AppContext
-import uk.gov.hmrc.play.test.UnitSpec
+import play.api.test.NoMaterializer
+import play.api.Configuration
+import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
 
-class DefinitionControllerSpec extends UnitSpec with MockitoSugar with GuiceOneAppPerSuite with StubControllerComponentsFactory {
-  implicit val materializer: Materializer = app.materializer
+class DefinitionControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
+  implicit val materializer: Materializer = NoMaterializer
 
   trait Setup {
     val request = FakeRequest()
-    val appContext = new AppContext(app.configuration)
+    val mockConfig = mock[Configuration]
+    val urlFromConfig = "ciao/hey/welcome"
+    when(mockConfig.getOptional[String](*)(*)).thenReturn(Some(urlFromConfig))
+    val appContext = new AppContext(mockConfig)
     val controller = new DefinitionController(appContext, stubControllerComponents())
   }
 
   "get" should {
     "respond with the API definition" in new Setup {
-      val result: Result = await(controller.get()(request))
+      val result = controller.get()(request)
 
-      status(result) shouldBe Status.OK
-      val api: JsValue = (jsonBodyOf(result) \ "api").as[JsValue]
+      status(result) shouldBe OK
+      val api: JsValue = (contentAsJson(result) \ "api").as[JsValue]
       (api \ "name").as[String] shouldBe "Ciao multi-segment context API"
-      (api \ "context").as[String] shouldBe "ciao/hey/welcome"
+      (api \ "context").as[String] shouldBe urlFromConfig
     }
   }
 }

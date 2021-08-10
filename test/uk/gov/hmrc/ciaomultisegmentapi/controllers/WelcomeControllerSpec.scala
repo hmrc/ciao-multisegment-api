@@ -16,16 +16,17 @@
 
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
-import play.api.http.Status
 import play.api.libs.json.Json
 import play.api.test.{FakeRequest, StubControllerComponentsFactory}
 import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
-import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
+import play.api.test.NoMaterializer
+import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
+import play.api.test.Helpers._
 
-class WelcomeControllerSpec extends UnitSpec with WithFakeApplication with StubControllerComponentsFactory {
+class WelcomeControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
 
-  private implicit val materializer = fakeApplication.materializer
+  private implicit val materializer = NoMaterializer
 
   private val controller = new WelcomeController(stubControllerComponents())
 
@@ -37,11 +38,11 @@ class WelcomeControllerSpec extends UnitSpec with WithFakeApplication with StubC
 
       val result = controller.welcome()(request)
 
-      status(result) shouldBe Status.OK
+      status(result) shouldBe OK
 
       val expectedAnswer = WelcomeMessage("Ciao!")
 
-      await(jsonBodyOf(result)) shouldBe Json.toJson(expectedAnswer)
+      contentAsJson(result) shouldBe Json.toJson(expectedAnswer)
     }
 
     "respond with the expected message when calling GET /:friend " in {
@@ -52,11 +53,11 @@ class WelcomeControllerSpec extends UnitSpec with WithFakeApplication with StubC
 
       val result = controller.welcomeFriend(friend)(request)
 
-      status(result) shouldBe Status.OK
+      status(result) shouldBe OK
 
       val expectedAnswer = WelcomeMessage(s"Ciao $friend!")
 
-      await(jsonBodyOf(result)) shouldBe Json.toJson(expectedAnswer)
+      contentAsJson(result) shouldBe Json.toJson(expectedAnswer)
     }
 
     "respond with the expected message when calling GET /:friend/:city " in {
@@ -68,11 +69,11 @@ class WelcomeControllerSpec extends UnitSpec with WithFakeApplication with StubC
 
       val result = controller.welcomeFriendCity(friend, city)(request)
 
-      status(result) shouldBe Status.OK
+      status(result) shouldBe OK
 
       val expectedAnswer = WelcomeMessage(s"Ciao $friend! Welcome to $city!")
 
-      await(jsonBodyOf(result)) shouldBe Json.toJson(expectedAnswer)
+      contentAsJson(result) shouldBe Json.toJson(expectedAnswer)
     }
 
   }
