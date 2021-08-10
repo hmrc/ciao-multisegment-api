@@ -32,7 +32,7 @@ lazy val mockitoVersion = "1.10.19"
 
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-backend-play-26" % "5.7.0",
+  "uk.gov.hmrc" %% "bootstrap-backend-play-26" % "5.10.0",
   "uk.gov.hmrc" %% "play-hmrc-api" % "6.4.0-play-26"
 )
 
