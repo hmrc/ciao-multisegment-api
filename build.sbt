@@ -24,11 +24,9 @@ import uk.gov.hmrc._
 import DefaultBuildSettings._
 import sbt.Tests.{Group, SubProcess}
 
+import bloop.integrations.sbt.BloopDefaults
 
 val appName = "ciao-multisegment-api"
-
-lazy val scalatestPlusPlayVersion = "3.1.2"
-lazy val mockitoVersion = "1.10.19"
 
 lazy val compile = Seq(
   ws,
@@ -36,17 +34,13 @@ lazy val compile = Seq(
   "uk.gov.hmrc" %% "play-hmrc-api" % "6.4.0-play-26"
 )
 
-lazy val testScope = "test"
-
 lazy val test = Seq(
-  "uk.gov.hmrc" %% "hmrctest" % "3.9.0-play-26" % testScope,
-  "org.scalatest" %% "scalatest" % "3.0.4" % testScope,
-  "org.pegdown" % "pegdown" % "1.6.0" % testScope,
-  "org.mockito" % "mockito-core" % mockitoVersion % testScope,
-  "org.scalatestplus.play" %% "scalatestplus-play" % scalatestPlusPlayVersion % testScope,
-  "com.typesafe.play" %% "play-test" % PlayVersion.current % testScope,
-  "com.github.tomakehurst" % "wiremock-jre8-standalone" % "2.27.2" % testScope
-)
+  "org.pegdown" % "pegdown" % "1.6.0",
+  "org.mockito" %% "mockito-scala-scalatest" % "1.7.1",
+  "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.3",
+  "com.typesafe.play" %% "play-test" % PlayVersion.current,
+  "com.github.tomakehurst" % "wiremock-jre8-standalone" % "2.27.2"
+).map(_ % "test")
 
 lazy val appDependencies: Seq[ModuleID] = compile ++ test
 
@@ -56,6 +50,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(publishingSettings: _*)
   .settings(defaultSettings(): _*)
   .settings(unmanagedResourceDirectories in Compile += baseDirectory.value / "resources")
+  .settings(ScoverageSettings())
   .settings(
     name := appName,
     targetJvm := "jvm-1.8",
@@ -64,14 +59,10 @@ lazy val microservice = Project(appName, file("."))
     libraryDependencies ++= appDependencies,
     evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(warnScalaVersionEviction = false)
   )
+  .settings(inConfig(Test)(BloopDefaults.configSettings))
   .settings(
-    testOptions in Test := Seq(Tests.Filter(_ => true)), // this removes duplicated lines in the HTML test reports
-    unmanagedSourceDirectories in Test := Seq((baseDirectory in Test).value / "test" / "unit"),
+    Test / testOptions := Seq(Tests.Filter(_ => true)), // this removes duplicated lines in the HTML test reports
+    Test / unmanagedSourceDirectories += baseDirectory.value / "test",
+    Test / unmanagedSourceDirectories += baseDirectory.value / "testcommon",
     addTestReportOption(Test, "test-reports")
   )
-
-
-// Coverage configuration
-coverageMinimum := 35
-coverageFailOnMinimum := true
-coverageExcludedPackages := "<empty>;com.kenshoo.play.metrics.*;.*definition.*;prod.*;testOnlyDoNotUseInAppConf.*;app.*;uk.gov.hmrc.BuildInfo;views.*;uk.gov.hmrc.ciaomultisegmentapi.config.*"

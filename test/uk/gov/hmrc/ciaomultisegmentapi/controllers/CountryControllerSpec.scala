@@ -17,17 +17,17 @@
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
 import akka.stream.Materializer
-import play.api.http.Status
 import play.api.libs.json.Json
 import play.api.test.{FakeRequest, StubControllerComponentsFactory}
-import play.api.http.HttpVerbs._
+import play.api.test.Helpers._
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
-import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
+import play.api.test.NoMaterializer
+import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
 
-class CountryControllerSpec extends UnitSpec with WithFakeApplication with StubControllerComponentsFactory{
+class CountryControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
 
-  private implicit val materializer: Materializer = fakeApplication.materializer
+  private implicit val materializer: Materializer = NoMaterializer
 
   private val controller = new CountryController(stubControllerComponents())
 
@@ -44,11 +44,11 @@ class CountryControllerSpec extends UnitSpec with WithFakeApplication with StubC
 
         val result = controller.showCountry(country)(request)
 
-        status(result) shouldBe Status.OK
+        status(result) shouldBe OK
 
         val expectedAnswer = WelcomeMessage(s"$verb: You are in $country!")
 
-        await(jsonBodyOf(result)) shouldBe Json.toJson(expectedAnswer)
+        contentAsJson(result) shouldBe Json.toJson(expectedAnswer)
       }
 
     }
@@ -65,11 +65,11 @@ class CountryControllerSpec extends UnitSpec with WithFakeApplication with StubC
 
         val result = controller.showCountryAndCity(country, city)(request)
 
-        status(result) shouldBe Status.OK
+        status(result) shouldBe OK
 
         val expectedAnswer = WelcomeMessage(s"$verb: You are in $city, which is inside $country!")
 
-        await(jsonBodyOf(result)) shouldBe Json.toJson(expectedAnswer)
+        contentAsJson(result) shouldBe Json.toJson(expectedAnswer)
       }
 
     }
