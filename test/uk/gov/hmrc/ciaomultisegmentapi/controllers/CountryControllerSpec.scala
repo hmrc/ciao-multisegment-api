@@ -22,8 +22,8 @@ import play.api.test.{FakeRequest, StubControllerComponentsFactory}
 import play.api.test.Helpers._
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
-import play.api.test.NoMaterializer
 import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
+import akka.stream.testkit.NoMaterializer
 
 class CountryControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
 

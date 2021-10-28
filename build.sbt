@@ -30,16 +30,15 @@ val appName = "ciao-multisegment-api"
 
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-backend-play-26" % "5.10.0",
-  "uk.gov.hmrc" %% "play-hmrc-api" % "6.4.0-play-26"
+  "uk.gov.hmrc"             %% "bootstrap-backend-play-28"    % "5.16.0",
+  "uk.gov.hmrc"             %% "play-hmrc-api"                % "6.4.0-play-28"
 )
 
 lazy val test = Seq(
-  "org.pegdown" % "pegdown" % "1.6.0",
-  "org.mockito" %% "mockito-scala-scalatest" % "1.7.1",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.3",
-  "com.typesafe.play" %% "play-test" % PlayVersion.current,
-  "com.github.tomakehurst" % "wiremock-jre8-standalone" % "2.27.2"
+  "uk.gov.hmrc"             %% "bootstrap-test-play-28"       % "5.16.0",
+  "org.mockito"             %% "mockito-scala-scalatest"      % "1.7.1",
+  "com.typesafe.play"       %% "play-test"                    % PlayVersion.current,
+  "com.github.tomakehurst"  %  "wiremock-jre8-standalone"     % "2.27.2"
 ).map(_ % "test")
 
 lazy val appDependencies: Seq[ModuleID] = compile ++ test

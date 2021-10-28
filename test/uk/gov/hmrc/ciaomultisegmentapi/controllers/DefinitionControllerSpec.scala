@@ -21,9 +21,9 @@ import play.api.libs.json.JsValue
 import play.api.test.{FakeRequest, StubControllerComponentsFactory}
 import play.api.test.Helpers._
 import uk.gov.hmrc.ciaomultisegmentapi.config.AppContext
-import play.api.test.NoMaterializer
 import play.api.Configuration
 import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
+import akka.stream.testkit.NoMaterializer
 
 class DefinitionControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
   implicit val materializer: Materializer = NoMaterializer

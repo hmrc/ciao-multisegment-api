@@ -17,11 +17,21 @@
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
 import controllers.Assets
-import javax.inject.Inject
-import play.api.http.HttpErrorHandler
-import play.api.mvc.ControllerComponents
-import uk.gov.hmrc.api.controllers.DocumentationController
+import javax.inject.{Inject, Singleton}
+import play.api.mvc.{Action, AnyContent, ControllerComponents}
+import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
-class InjectableDocumentController @Inject()( cc:           ControllerComponents,
-                                               assets:       Assets,
-                                               errorHandler: HttpErrorHandler)extends DocumentationController(cc, assets, errorHandler)
+@Singleton
+class DocumentationController @Inject()(assets: Assets, cc: ControllerComponents) extends BackendController(cc) {
+
+  def definition: Action[AnyContent] = {
+    assets.at("/public/api", "definition.json")
+  }
+
+  def raml(version: String, file: String): Action[AnyContent] = {
+    assets.at(s"/public/api/conf/$version", file)
+  }
+
+  def conf(version: String, file: String): Action[AnyContent] =
+    assets.at(s"/public/api/conf/$version", file)
+}
