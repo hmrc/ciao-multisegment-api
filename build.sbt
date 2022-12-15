@@ -28,16 +28,17 @@ import bloop.integrations.sbt.BloopDefaults
 
 val appName = "ciao-multisegment-api"
 
+val bootstrapVersion = "7.12.0"
+
 lazy val compile = Seq(
   ws,
-  "uk.gov.hmrc"             %% "bootstrap-backend-play-28"    % "5.16.0",
-  "uk.gov.hmrc"             %% "play-hmrc-api"                % "6.4.0-play-28"
+  "uk.gov.hmrc"             %% "bootstrap-backend-play-28"    % bootstrapVersion,
+  "uk.gov.hmrc"             %% "play-hmrc-api"                % "7.1.0-play-28"
 )
 
 lazy val test = Seq(
-  "uk.gov.hmrc"             %% "bootstrap-test-play-28"       % "5.16.0",
+  "uk.gov.hmrc"             %% "bootstrap-test-play-28"       % bootstrapVersion,
   "org.mockito"             %% "mockito-scala-scalatest"      % "1.7.1",
-  "com.typesafe.play"       %% "play-test"                    % PlayVersion.current,
   "com.github.tomakehurst"  %  "wiremock-jre8-standalone"     % "2.27.2"
 ).map(_ % "test")
 
