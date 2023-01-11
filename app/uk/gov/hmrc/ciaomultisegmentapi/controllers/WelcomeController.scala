@@ -26,9 +26,9 @@ import scala.concurrent.Future.successful
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
 @Singleton()
-class WelcomeController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class WelcomeController @Inject() (cc: ControllerComponents) extends BackendController(cc) {
 
-	def welcome(): Action[AnyContent] = Action.async { _ =>
+  def welcome(): Action[AnyContent] = Action.async { _ =>
     successful(
       Ok(toJson(WelcomeMessage("Ciao!")))
     )

@@ -63,7 +63,7 @@ class WelcomeControllerSpec extends AsyncHmrcSpec with StubControllerComponentsF
     "respond with the expected message when calling GET /:friend/:city " in {
 
       val friend = "Alvise"
-      val city = "Paris"
+      val city   = "Paris"
 
       val request = FakeRequest(method = "GET", path = s"/$friend/$city")
 

@@ -32,14 +32,13 @@ class CountryControllerSpec extends AsyncHmrcSpec with StubControllerComponentsF
   private val controller = new CountryController(stubControllerComponents())
 
   private val country = "Chile"
-  private val city = "Santiago"
+  private val city    = "Santiago"
 
   "CountryController.showCountry()" should {
 
     "respond with the expected message" in {
 
       List(GET, PUT).foreach { verb =>
-
         val request = FakeRequest(method = verb, path = s"/country-details/$country/display")
 
         val result = controller.showCountry(country)(request)
@@ -60,7 +59,6 @@ class CountryControllerSpec extends AsyncHmrcSpec with StubControllerComponentsF
     "respond with the expected message" in {
 
       List(POST, DELETE).foreach { verb =>
-
         val request = FakeRequest(method = verb, path = s"/country-details/$country/$city")
 
         val result = controller.showCountryAndCity(country, city)(request)

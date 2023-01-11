@@ -26,7 +26,7 @@ import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import scala.concurrent.Future.successful
 
 @Singleton()
-class CountryController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class CountryController @Inject() (cc: ControllerComponents) extends BackendController(cc) {
 
   def showCountry(country: String): Action[AnyContent] = Action.async { implicit request =>
     successful(

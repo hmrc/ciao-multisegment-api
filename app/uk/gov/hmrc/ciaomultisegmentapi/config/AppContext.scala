@@ -20,7 +20,7 @@ import javax.inject.{Inject, Singleton}
 import play.api.Configuration
 
 @Singleton
-class AppContext @Inject()(configuration: Configuration) {
+class AppContext @Inject() (configuration: Configuration) {
 
   private val apiContextConfigKey = "api.context"
 

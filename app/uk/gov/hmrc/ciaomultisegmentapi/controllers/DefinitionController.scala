@@ -25,7 +25,7 @@ import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import scala.concurrent.Future.successful
 
 @Singleton
-class DefinitionController @Inject()(appContext: AppContext, cc: ControllerComponents) extends BackendController(cc) {
+class DefinitionController @Inject() (appContext: AppContext, cc: ControllerComponents) extends BackendController(cc) {
 
   def get(): Action[AnyContent] = Action.async {
     successful(

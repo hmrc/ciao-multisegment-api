@@ -29,12 +29,12 @@ class DefinitionControllerSpec extends AsyncHmrcSpec with StubControllerComponen
   implicit val materializer: Materializer = NoMaterializer
 
   trait Setup {
-    val request = FakeRequest()
-    val mockConfig = mock[Configuration]
+    val request       = FakeRequest()
+    val mockConfig    = mock[Configuration]
     val urlFromConfig = "ciao/hey/welcome"
     when(mockConfig.getOptional[String](*)(*)).thenReturn(Some(urlFromConfig))
-    val appContext = new AppContext(mockConfig)
-    val controller = new DefinitionController(appContext, stubControllerComponents())
+    val appContext    = new AppContext(mockConfig)
+    val controller    = new DefinitionController(appContext, stubControllerComponents())
   }
 
   "get" should {
