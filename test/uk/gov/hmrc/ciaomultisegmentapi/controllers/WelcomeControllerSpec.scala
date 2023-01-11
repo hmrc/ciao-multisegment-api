@@ -16,13 +16,14 @@
 
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
-import play.api.libs.json.Json
-import play.api.test.{FakeRequest, StubControllerComponentsFactory}
-import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
-import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
-import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
-import play.api.test.Helpers._
 import akka.stream.testkit.NoMaterializer
+
+import play.api.libs.json.Json
+import play.api.test.Helpers._
+import play.api.test.{FakeRequest, StubControllerComponentsFactory}
+import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
+import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
+import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
 
 class WelcomeControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
 

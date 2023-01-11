@@ -17,12 +17,12 @@
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
 import javax.inject.{Inject, Singleton}
+import scala.concurrent.Future.successful
+
 import play.api.libs.json.Json.toJson
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
-import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
-
-import scala.concurrent.Future.successful
+import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
 @Singleton()
