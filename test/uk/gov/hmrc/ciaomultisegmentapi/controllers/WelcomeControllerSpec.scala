@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,14 @@
 
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
-import play.api.libs.json.Json
-import play.api.test.{FakeRequest, StubControllerComponentsFactory}
-import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
-import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
-import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
-import play.api.test.Helpers._
 import akka.stream.testkit.NoMaterializer
+
+import play.api.libs.json.Json
+import play.api.test.Helpers._
+import play.api.test.{FakeRequest, StubControllerComponentsFactory}
+import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
+import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
+import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
 
 class WelcomeControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
 
@@ -63,7 +64,7 @@ class WelcomeControllerSpec extends AsyncHmrcSpec with StubControllerComponentsF
     "respond with the expected message when calling GET /:friend/:city " in {
 
       val friend = "Alvise"
-      val city = "Paris"
+      val city   = "Paris"
 
       val request = FakeRequest(method = "GET", path = s"/$friend/$city")
 

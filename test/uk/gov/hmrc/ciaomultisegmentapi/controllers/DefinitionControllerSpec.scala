@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,24 +17,25 @@
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
 import akka.stream.Materializer
-import play.api.libs.json.JsValue
-import play.api.test.{FakeRequest, StubControllerComponentsFactory}
-import play.api.test.Helpers._
-import uk.gov.hmrc.ciaomultisegmentapi.config.AppContext
-import play.api.Configuration
-import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
 import akka.stream.testkit.NoMaterializer
+
+import play.api.Configuration
+import play.api.libs.json.JsValue
+import play.api.test.Helpers._
+import play.api.test.{FakeRequest, StubControllerComponentsFactory}
+import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
+import uk.gov.hmrc.ciaomultisegmentapi.config.AppContext
 
 class DefinitionControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
   implicit val materializer: Materializer = NoMaterializer
 
   trait Setup {
-    val request = FakeRequest()
-    val mockConfig = mock[Configuration]
+    val request       = FakeRequest()
+    val mockConfig    = mock[Configuration]
     val urlFromConfig = "ciao/hey/welcome"
     when(mockConfig.getOptional[String](*)(*)).thenReturn(Some(urlFromConfig))
-    val appContext = new AppContext(mockConfig)
-    val controller = new DefinitionController(appContext, stubControllerComponents())
+    val appContext    = new AppContext(mockConfig)
+    val controller    = new DefinitionController(appContext, stubControllerComponents())
   }
 
   "get" should {

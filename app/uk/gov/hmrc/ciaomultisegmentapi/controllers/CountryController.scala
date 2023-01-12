@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,16 @@
 package uk.gov.hmrc.ciaomultisegmentapi.controllers
 
 import javax.inject.{Inject, Singleton}
+import scala.concurrent.Future.successful
+
 import play.api.libs.json.Json.toJson
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
-import scala.concurrent.Future.successful
-
 @Singleton()
-class CountryController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class CountryController @Inject() (cc: ControllerComponents) extends BackendController(cc) {
 
   def showCountry(country: String): Action[AnyContent] = Action.async { implicit request =>
     successful(
