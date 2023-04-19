@@ -14,15 +14,11 @@ val appName = "ciao-multisegment-api"
 
 val bootstrapVersion = "7.12.0"
 
-ThisBuild / scalafixDependencies += "com.github.liancheng" %% "organize-imports" % "0.6.0"
+scalaVersion := "2.13.8"
 
-inThisBuild(
-  List(
-    scalaVersion := "2.12.12",
-    semanticdbEnabled := true,
-    semanticdbVersion := scalafixSemanticdb.revision
-  )
-)
+ThisBuild / scalafixDependencies += "com.github.liancheng" %% "organize-imports" % "0.6.0"
+ThisBuild / semanticdbEnabled := true
+ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
 lazy val compile = Seq(
   ws,
@@ -48,9 +44,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(
     name := appName,
     majorVersion := 0,
-    scalaVersion := "2.12.12",
-    libraryDependencies ++= appDependencies,
-    update / evictionWarningOptions := EvictionWarningOptions.default.withWarnScalaVersionEviction(warnScalaVersionEviction = false)
+    libraryDependencies ++= appDependencies
   )
   .settings(inConfig(Test)(BloopDefaults.configSettings))
   .settings(
@@ -58,4 +52,12 @@ lazy val microservice = Project(appName, file("."))
     Test / unmanagedSourceDirectories += baseDirectory.value / "test",
     Test / unmanagedSourceDirectories += baseDirectory.value / "testcommon",
     addTestReportOption(Test, "test-reports")
+  )
+  .settings(
+    scalacOptions ++= Seq(
+      "-Wconf:cat=unused&src=views/.*\\.scala:s",
+      "-Wconf:cat=unused&src=.*RoutesPrefix\\.scala:s",
+      "-Wconf:cat=unused&src=.*Routes\\.scala:s",
+      "-Wconf:cat=unused&src=.*ReverseRoutes\\.scala:s"
+    )
   )
