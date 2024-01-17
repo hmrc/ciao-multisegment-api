@@ -12,11 +12,11 @@ import bloop.integrations.sbt.BloopDefaults
 
 val appName = "ciao-multisegment-api"
 
-val bootstrapVersion = "7.12.0"
+val bootstrapVersion = "7.15.0"
 
-scalaVersion := "2.13.8"
+scalaVersion := "2.13.12"
 
-ThisBuild / scalafixDependencies += "com.github.liancheng" %% "organize-imports" % "0.6.0"
+ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
@@ -27,9 +27,11 @@ lazy val compile = Seq(
 )
 
 lazy val test = Seq(
-  "uk.gov.hmrc"             %% "bootstrap-test-play-28"       % bootstrapVersion,
-  "org.mockito"             %% "mockito-scala-scalatest"      % "1.7.1",
-  "com.github.tomakehurst"  %  "wiremock-jre8-standalone"     % "2.27.2"
+  "uk.gov.hmrc"             %% "bootstrap-test-play-28"           % bootstrapVersion,
+  "com.vladsch.flexmark"     % "flexmark-all"                     % "0.62.2",
+  "com.github.tomakehurst"  %  "wiremock-jre8-standalone"         % "2.31.0",
+  "org.mockito"             %% "mockito-scala-scalatest"          % "1.17.29",
+  "org.scalatest"           %% "scalatest"                        % "3.2.17"
 ).map(_ % "test")
 
 lazy val appDependencies: Seq[ModuleID] = compile ++ test
@@ -61,3 +63,15 @@ lazy val microservice = Project(appName, file("."))
       "-Wconf:cat=unused&src=.*ReverseRoutes\\.scala:s"
     )
   )
+
+Global / bloopAggregateSourceDependencies := true
+Global / bloopExportJarClassifiers := Some(Set("sources"))
+
+commands ++= Seq(
+  Command.command("run-all-tests") { state => "test" :: state },
+
+  Command.command("clean-and-test") { state => "clean" :: "compile" :: "run-all-tests" :: state },
+
+  // Coverage does not need compile !
+  Command.command("pre-commit") { state => "clean" :: "scalafmtAll" :: "scalafixAll" :: "coverage" :: "run-all-tests" :: "coverageOff" :: "coverageAggregate" :: state }
+)

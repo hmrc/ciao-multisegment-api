@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,10 +24,11 @@ import play.api.test.{FakeRequest, StubControllerComponentsFactory}
 import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage
+import akka.stream.Materializer
 
 class WelcomeControllerSpec extends AsyncHmrcSpec with StubControllerComponentsFactory {
 
-  private implicit val materializer = NoMaterializer
+  private implicit val materializer: Materializer = NoMaterializer
 
   private val controller = new WelcomeController(stubControllerComponents())
 
