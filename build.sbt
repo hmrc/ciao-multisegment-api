@@ -20,21 +20,6 @@ ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" 
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
-lazy val compile = Seq(
-  ws,
-  "uk.gov.hmrc"             %% "bootstrap-backend-play-28"    % bootstrapVersion,
-  "uk.gov.hmrc"             %% "play-hmrc-api"                % "7.1.0-play-28"
-)
-
-lazy val test = Seq(
-  "uk.gov.hmrc"             %% "bootstrap-test-play-28"           % bootstrapVersion,
-  "com.vladsch.flexmark"     % "flexmark-all"                     % "0.62.2",
-  "com.github.tomakehurst"  %  "wiremock-jre8-standalone"         % "2.31.0",
-  "org.mockito"             %% "mockito-scala-scalatest"          % "1.17.29",
-  "org.scalatest"           %% "scalatest"                        % "3.2.17"
-).map(_ % "test")
-
-lazy val appDependencies: Seq[ModuleID] = compile ++ test
 
 lazy val microservice = Project(appName, file("."))
   .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtDistributablesPlugin)
@@ -45,7 +30,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(
     name := appName,
     majorVersion := 0,
-    libraryDependencies ++= appDependencies
+    libraryDependencies ++= AppDependencies(),
   )
   .settings(inConfig(Test)(BloopDefaults.configSettings))
   .settings(
