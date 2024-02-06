@@ -2,7 +2,7 @@ import scoverage.ScoverageKeys._
 
 object ScoverageSettings {
   def apply() = Seq(
-    coverageMinimumStmtTotal := 85,
+    coverageMinimumStmtTotal := 90,
     coverageFailOnMinimum := true,
     coverageHighlighting := true,
     coverageExcludedPackages :=  Seq(
@@ -12,7 +12,6 @@ object ScoverageSettings {
       "app.*;" +
       ".*Reverse.*",
       ".*Routes.*",
-      "com\\.kenshoo\\.play\\.metrics\\.*",
       ".*BuildInfo.*"
     ).mkString(";")
   )
