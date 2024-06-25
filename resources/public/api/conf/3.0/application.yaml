@@ -82,6 +82,20 @@ paths:
       security:
       - {}
       
+    options:
+      tags:
+      - ciao
+      summary: Show Country - Options Version
+      operationId: ShowCountry-OptionsVersion
+      parameters:
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/acceptHeader'
+      responses:
+        200:
+          description: "OK Response"
+      security:
+      - {}
+      
   /ciao/hey/welcome/country-details/{country}/{city}:
     get:
       tags:
