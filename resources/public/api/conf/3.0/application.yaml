@@ -1,0 +1,147 @@
+openapi: 3.0.3
+info:
+  title: Ciao multi-segment context dummy API
+  description: |
+    # Overview
+    Dummy API created for testing purposes.
+  version: '3.0'
+  
+servers:
+  - url: https://api.development.tax.service.gov.uk
+    description: Development
+  - url: https://api.qa.tax.service.gov.uk
+    description: QA
+    
+components:
+  parameters:
+    acceptHeader:
+      name: Accept
+      in: header
+      schema:
+        type: string
+        enum: [
+          "application/vnd.hmrc.3.0+json"
+        ]
+      required: true
+      
+    country:
+      name: country
+      in: path
+      style: simple
+      schema:
+        type: string
+      required: true
+      
+    city:
+      name: city
+      in: path
+      style: simple
+      schema:
+        type: string
+      required: true
+
+paths:
+  /ciao/hey/welcome/country-details/{country}/display:
+    get:
+      tags:
+      - ciao
+      summary: Show Country - Get Version
+      operationId: ShowCountry-GetVersion
+      parameters:
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/acceptHeader'
+      responses:
+        200:
+          description: "OK Response"
+          content:
+            application/json:
+              example: 
+                {
+                  "message":"GET: You are in england!"
+                }
+      security:
+      - {}
+      
+    put:
+      tags:
+      - ciao
+      summary: Show Country - Put Version
+      operationId: ShowCountry-PutVersion
+      parameters:
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/acceptHeader'
+      responses:
+        200:
+          description: "OK Response"
+          content:
+            application/json:
+              example: 
+                {
+                  "message":"PUT: You are in scotland!"
+                }
+      security:
+      - {}
+      
+  /ciao/hey/welcome/country-details/{country}/{city}:
+    get:
+      tags:
+      - ciao
+      summary: Show Country & City - Get Version
+      operationId: ShowCountry&City-GetVersion
+      parameters:
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/city'
+      - $ref: '#/components/parameters/acceptHeader'
+      responses:
+        200:
+          description: "OK Response"
+          content:
+            application/json:
+              example: 
+                {
+                  "message":"GET: You are in leeds, which is inside england!"
+                }
+      security:
+      - {}
+      
+    post:
+      tags:
+      - ciao
+      summary: Show Country & City - Post Version
+      operationId: ShowCountry&City-PostVersion
+      parameters:
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/city'
+      - $ref: '#/components/parameters/acceptHeader'
+      responses:
+        200:
+          description: "OK Response"
+          content:
+            application/json:
+              example: 
+                {
+                  "message":"POST: You are in dublin, which is inside ireland!"
+                }
+      security:
+      - {}
+
+    delete:
+      tags:
+      - ciao
+      summary: Show Country & City - Delete Version
+      operationId: ShowCountry&City-DeleteVersion
+      parameters:
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/city'
+      - $ref: '#/components/parameters/acceptHeader'
+      responses:
+        200:
+          description: "OK Response"
+          content:
+            application/json:
+              example: 
+                {
+                  "message":"DELETE: You are in dublin, which is inside ireland!"
+                }
+      security:
+      - {}
