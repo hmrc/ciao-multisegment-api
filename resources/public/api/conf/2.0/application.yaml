@@ -45,7 +45,7 @@ paths:
     get:
       tags:
       - ciao
-      summary: dummy Ciao resourc
+      summary: dummy Ciao resource
       parameters:
       - $ref: '#/components/parameters/acceptHeader'
       responses:
