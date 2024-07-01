@@ -1,9 +1,6 @@
 openapi: 3.0.3
 info:
   title: Ciao multi-segment context dummy API
-  description: |
-    # Overview
-    Dummy API created for testing purposes.
   version: '2.0'
   
 servers:
@@ -30,6 +27,7 @@ components:
       style: simple
       schema:
         type: string
+        example: Dave
       required: true
         
     city:    
@@ -38,13 +36,21 @@ components:
       style: simple
       schema:
         type: string
+        example: London
       required: true
+
+  securitySchemes:
+    OpenAccess:
+      type: http
+      description: |
+       This endpoint is open access.
+      scheme: open
   
 paths:
   /ciao/hey/welcome/:
     get:
       tags:
-      - ciao
+      - ciao-multisegment-api
       summary: dummy Ciao resource
       parameters:
       - $ref: '#/components/parameters/acceptHeader'
@@ -58,12 +64,13 @@ paths:
                   "message":"Ciao!"
                 }
       security:
-      - {}
-      
+      - OpenAccess: []
+   
+
   /ciao/hey/welcome/{friend}:
     get:
       tags:
-      - ciao
+      - ciao-multisegment-api
       summary: dummy Ciao Friend resource
       operationId: dummyCiaoFriendresource
       parameters:
@@ -79,12 +86,13 @@ paths:
                   "message":"Ciao Dave!"
                 }
       security:
-      - {}
-      
+      - OpenAccess: []
+  
+
   /ciao/hey/welcome/{friend}/{city}:
     get:
       tags:
-      - ciao
+      - ciao-multisegment-api
       summary: dummy Ciao Friend & City resource
       operationId: dummyCiaoFriend&Cityresource
       parameters:
@@ -101,4 +109,4 @@ paths:
                   "message":"Ciao Dave! Welcome to London!"
                 }
       security:
-      - {}
+      - OpenAccess: []
