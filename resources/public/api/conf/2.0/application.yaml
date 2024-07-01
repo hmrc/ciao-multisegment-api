@@ -38,13 +38,6 @@ components:
         type: string
         example: London
       required: true
-
-  securitySchemes:
-    OpenAccess:
-      type: http
-      description: |
-       This endpoint is open access.
-      scheme: open
   
 paths:
   /ciao/hey/welcome/:
@@ -64,7 +57,7 @@ paths:
                   "message":"Ciao!"
                 }
       security:
-      - OpenAccess: []
+      - {}
    
 
   /ciao/hey/welcome/{friend}:
@@ -86,7 +79,7 @@ paths:
                   "message":"Ciao Dave!"
                 }
       security:
-      - OpenAccess: []
+      - {}
   
 
   /ciao/hey/welcome/{friend}/{city}:
@@ -109,4 +102,4 @@ paths:
                   "message":"Ciao Dave! Welcome to London!"
                 }
       security:
-      - OpenAccess: []
+      - {}
