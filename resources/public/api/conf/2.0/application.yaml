@@ -56,8 +56,6 @@ paths:
                 {
                   "message":"Ciao!"
                 }
-      security:
-      - {}
    
 
   /ciao/hey/welcome/{friend}:
@@ -78,8 +76,6 @@ paths:
                 {
                   "message":"Ciao Dave!"
                 }
-      security:
-      - {}
   
 
   /ciao/hey/welcome/{friend}/{city}:
@@ -101,5 +97,3 @@ paths:
                 {
                   "message":"Ciao Dave! Welcome to London!"
                 }
-      security:
-      - {}
