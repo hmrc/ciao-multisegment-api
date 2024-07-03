@@ -45,6 +45,8 @@ paths:
       tags:
       - ciao-multisegment-api
       summary: dummy Ciao resource
+      description: |
+        Any request to this endpoint initiates a 'Ciao' response.
       parameters:
       - $ref: '#/components/parameters/acceptHeader'
       responses:
@@ -65,6 +67,8 @@ paths:
       tags:
       - ciao-multisegment-api
       summary: dummy Ciao Friend resource
+      description: |
+        Any request to this endpoint initiates a 'Ciao Friend' response.
       operationId: dummyCiaoFriendresource
       parameters:
       - $ref: '#/components/parameters/friend'
@@ -87,6 +91,8 @@ paths:
       tags:
       - ciao-multisegment-api
       summary: dummy Ciao Friend & City resource
+      description: |
+        Any request to this endpoint initiates a 'Ciao Friend and City’ response.
       operationId: dummyCiaoFriend&Cityresource
       parameters:
       - $ref: '#/components/parameters/friend'

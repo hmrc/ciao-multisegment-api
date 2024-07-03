@@ -1,9 +1,6 @@
 openapi: 3.0.3
 info:
   title: Ciao multi-segment context dummy API
-  description: |
-    # Overview
-    Dummy API created for testing purposes.
   version: '3.0'
   
 servers:
@@ -30,6 +27,7 @@ components:
       style: simple
       schema:
         type: string
+        example: England
       required: true
       
     city:
@@ -38,14 +36,17 @@ components:
       style: simple
       schema:
         type: string
+        example: Leeds
       required: true
 
 paths:
   /ciao/hey/welcome/country-details/{country}/display:
     get:
       tags:
-      - ciao
+      - ciao-multisegment-api
       summary: Show Country - Get Version
+      description: |
+        Any request to this endpoint initiates a 'Country’ response.
       operationId: ShowCountry-GetVersion
       parameters:
       - $ref: '#/components/parameters/country'
@@ -57,15 +58,17 @@ paths:
             application/json:
               example: 
                 {
-                  "message":"GET: You are in england!"
+                  "message":"GET: You are in England!"
                 }
       security:
       - {}
       
     put:
       tags:
-      - ciao
+      - ciao-multisegment-api
       summary: Show Country - Put Version
+      description: |
+        Any request to this endpoint initiates a 'Country’ response.
       operationId: ShowCountry-PutVersion
       parameters:
       - $ref: '#/components/parameters/country'
@@ -77,30 +80,18 @@ paths:
             application/json:
               example: 
                 {
-                  "message":"PUT: You are in scotland!"
+                  "message":"PUT: You are in England!"
                 }
-      security:
-      - {}
-      
-    options:
-      tags:
-      - ciao
-      summary: Show Country - Options Version
-      operationId: ShowCountry-OptionsVersion
-      parameters:
-      - $ref: '#/components/parameters/country'
-      - $ref: '#/components/parameters/acceptHeader'
-      responses:
-        200:
-          description: "OK Response"
       security:
       - {}
       
   /ciao/hey/welcome/country-details/{country}/{city}:
     get:
       tags:
-      - ciao
+      - ciao-multisegment-api
       summary: Show Country & City - Get Version
+      description: |
+        Any request to this endpoint initiates a 'Country and City’ response.
       operationId: ShowCountry&City-GetVersion
       parameters:
       - $ref: '#/components/parameters/country'
@@ -113,15 +104,17 @@ paths:
             application/json:
               example: 
                 {
-                  "message":"GET: You are in leeds, which is inside england!"
+                  "message":"GET: You are in Leeds, which is inside England!"
                 }
       security:
       - {}
       
     post:
       tags:
-      - ciao
+      - ciao-multisegment-api
       summary: Show Country & City - Post Version
+      description: |
+        Any request to this endpoint initiates a 'Country and City’ response.
       operationId: ShowCountry&City-PostVersion
       parameters:
       - $ref: '#/components/parameters/country'
@@ -134,15 +127,17 @@ paths:
             application/json:
               example: 
                 {
-                  "message":"POST: You are in dublin, which is inside ireland!"
+                  "message":"POST: You are in Leeds, which is inside England!"
                 }
       security:
       - {}
 
     delete:
       tags:
-      - ciao
+      - ciao-multisegment-api
       summary: Show Country & City - Delete Version
+      description: |
+        Any request to this endpoint initiates a 'Country and City’ response.
       operationId: ShowCountry&City-DeleteVersion
       parameters:
       - $ref: '#/components/parameters/country'
@@ -155,7 +150,7 @@ paths:
             application/json:
               example: 
                 {
-                  "message":"DELETE: You are in dublin, which is inside ireland!"
+                  "message":"DELETE: You are in Leeds, which is inside England!"
                 }
       security:
       - {}
