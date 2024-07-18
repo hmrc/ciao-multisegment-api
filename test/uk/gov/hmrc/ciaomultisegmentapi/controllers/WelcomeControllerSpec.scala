@@ -22,6 +22,7 @@ import org.apache.pekko.stream.testkit.NoMaterializer
 import play.api.libs.json.Json
 import play.api.test.Helpers._
 import play.api.test.{FakeRequest, StubControllerComponentsFactory}
+
 import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
 import uk.gov.hmrc.ciaomultisegmentapi.models.JsonFormatters.formatWelcomeMessage
 import uk.gov.hmrc.ciaomultisegmentapi.models.WelcomeMessage

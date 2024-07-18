@@ -23,6 +23,7 @@ import play.api.Configuration
 import play.api.libs.json.JsValue
 import play.api.test.Helpers._
 import play.api.test.{FakeRequest, StubControllerComponentsFactory}
+
 import uk.gov.hmrc.ciaomultisegmentapi.AsyncHmrcSpec
 import uk.gov.hmrc.ciaomultisegmentapi.config.AppContext
 

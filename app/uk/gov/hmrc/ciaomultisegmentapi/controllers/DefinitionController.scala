@@ -20,9 +20,10 @@ import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future.successful
 
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
+import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
+
 import uk.gov.hmrc.ciaomultisegmentapi.config.AppContext
 import uk.gov.hmrc.ciaomultisegmentapi.views.txt.definition
-import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
 @Singleton
 class DefinitionController @Inject() (appContext: AppContext, cc: ControllerComponents) extends BackendController(cc) {
