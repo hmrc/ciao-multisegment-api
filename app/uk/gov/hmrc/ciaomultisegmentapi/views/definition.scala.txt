@@ -1,7 +1,6 @@
 @import play.api.libs.json.Json
 @(apiContext: String)
 {
-  "scopes":[],
   "api": {
     "name": "Ciao multi-segment context API",
     "description": "Dummy API for testing purpose",
