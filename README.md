@@ -1,6 +1,17 @@
 # Ciao multi-segment context API
 
-Dummy multi-segment context API created for testing purposes.
+This service has been created to test APIs with multiple segments in their context.
+It is used in the API Plaform acceptance tests [here]("https://github.com/hmrc/api-platform-acceptance-tests/blob/main/src/test/resources/features/apis/multisegmentContextApi.feature#L2") and [here]("https://github.com/hmrc/api-platform-acceptance-tests/blob/main/src/test/resources/features/platform/apiPublisher.feature#L10").
+This service can be used to test successful/failed publish of an API whose context contains multiple slashes.
+
+See the table below for examples of multi segmented contexts.
+
+| Context                               | API - Service name                  | Multi-segment <br/>Context? |
+|---------------------------------------|-------------------------------------|-----------------------------|
+| ciao/hey/welcome                      | ciao-multisegmeent-api              | Yes                         |
+| misc/telephony-identity-verification  | telephony-identity-verification-api | Yes                         |
+| hello                                 | api-example-microservice            | No                          |
+
 
 ---
 
