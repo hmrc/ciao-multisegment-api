@@ -7,7 +7,7 @@ object AppDependencies {
 
   lazy val appDependencies: Seq[ModuleID] = compile ++ test
 
-  lazy val bootStrapVersion = "9.0.0"
+  lazy val bootStrapVersion = "10.8.0"
 
   lazy val compile: Seq[ModuleID] = Seq(
     ws,
